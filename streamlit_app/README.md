@@ -93,7 +93,10 @@ pip install -r requirements.txt
 | Lead Scoring          | ![Lead Scoring](screenshots/lead_scoring.png) |
 | Customer Segmentation | ![Segmentation](screenshots/segmentation.png) |
 | Sentiment Analysis    | ![Sentiment](screenshots/sentiment.png)       |
-| Chat with Data        | ![Chat](screenshots/chat.png)                 |
+| Chat with Data        | ![Chat](screenshots/chat.png)                 |               |
+| Trend Forecasting     | ![Trend](screenshots/trend.png)               |
+| Churn Analysis        | ![Churn](screenshots/churn.png)               |
+| Export PDF            | ![PDF](screenshots/pdf.png)                   |
 
 > Screenshots are located in the `screenshots/` folder.
 

@@ -1,7 +1,0 @@
-fastapi
-uvicorn
-joblib
-pandas
-scikit-learn
-llama-index
-transformers

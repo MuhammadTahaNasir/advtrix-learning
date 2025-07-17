@@ -52,7 +52,7 @@ with st.expander("ℹ️ How to Use This App", expanded=True):
 st.sidebar.header("📁 Upload Your File")
 uploaded_file = st.sidebar.file_uploader("Choose a CSV or Excel file", type=["csv", "xlsx", "xls"])
 
-# Sample file loading (reverted to original logic with sample_data folder, removed PDF)
+# Sample file loading
 st.sidebar.markdown("### 🧪 Quick Load Sample Files")
 if st.sidebar.button("📄 Load Sample: Customers (CSV)"):
     sample_path = os.path.join("sample_data", "customers.csv")
@@ -110,12 +110,11 @@ def load_sentiment_model():
         st.warning("⚠️ Sentiment analysis unavailable due to model loading issue.")
         return None
 
-# Smart Q&A Function with Conversational Memory (Improved)
+# Smart Q&A Function with Conversational Memory
 def analyze_question(df, question, context="", sentence_model=None, qa_model=None):
     lower_q = question.lower()
     prompt = f"Context: {context}\nData Summary: {df.describe().to_string()}\nQuestion: {question}\nAnswer clearly and concisely:"
 
-    # Direct column-based answers or list queries
     for col in df.columns:
         if col.lower() in lower_q:
             if any(k in lower_q for k in ["most", "highest", "top", "max"]):
@@ -139,7 +138,7 @@ def analyze_question(df, question, context="", sentence_model=None, qa_model=Non
                     continue
             elif "list" in lower_q and "happy" in lower_q and "customer" in lower_q and 'sentiment' in df.columns:
                 try:
-                    happy_customers = df[df['sentiment'] == 'POSITIVE'].head(5)  # Return top 5 happy customers
+                    happy_customers = df[df['sentiment'] == 'POSITIVE'].head(5)
                     if not happy_customers.empty:
                         return (f"💡 List of happy customers (top 5):", happy_customers)
                     else:
@@ -150,13 +149,12 @@ def analyze_question(df, question, context="", sentence_model=None, qa_model=Non
     if sentence_model is None:
         return ("⚠️ Semantic search unavailable due to model loading issue.", None)
 
-    # Enhanced semantic search for multiple results
     sample_df = df.head(1000)
     row_texts = sample_df.astype(str).agg(" ".join, axis=1).tolist()
     row_embeddings = sentence_model.encode(row_texts, show_progress_bar=False)
     question_embedding = sentence_model.encode([question])
     sims = cosine_similarity(question_embedding, row_embeddings)[0]
-    top_indices = sims.argsort()[-5:][::-1]  # Top 5 most similar rows
+    top_indices = sims.argsort()[-5:][::-1]
     top_rows = sample_df.iloc[top_indices]
 
     context_summary = " ".join(row_texts[:3])
@@ -335,13 +333,16 @@ if df is not None:
             )
             st.altair_chart(bar_chart, use_container_width=True)
 
-            # Interactive Filters
+            # Interactive Filters (Fixed Slider Issue)
             st.sidebar.markdown("### 🔍 Data Filters")
             filtered_df = df.copy()
             for col in df.columns:
                 if df[col].dtype in ['int64', 'float64']:
                     min_val = float(df[col].min())
                     max_val = float(df[col].max())
+                    if min_val == max_val:
+                        st.sidebar.warning(f"⚠️ No range available for '{col}'. Skipping filter.")
+                        continue
                     selected_range = st.sidebar.slider(f"Filter {col}", min_val, max_val, (min_val, max_val))
                     filtered_df = filtered_df[(filtered_df[col] >= selected_range[0]) & (filtered_df[col] <= selected_range[1])]
             with st.expander("📋 Filtered Data", expanded=False):
@@ -454,7 +455,6 @@ if df is not None:
                     if "chat_context" not in st.session_state:
                         st.session_state.chat_context = ""
 
-                    # Create a container for chat history
                     chat_container = st.container()
                     with chat_container:
                         for i, (q, a, df_resp) in enumerate(st.session_state.chat_history):
@@ -469,7 +469,6 @@ if df is not None:
                                             render_chart_in_chat(df, col)
                                             break
 
-                    # Place chat input at the bottom using a separate container
                     input_container = st.container()
                     with input_container:
                         user_input = st.chat_input("Ask a question or give a data command...")
