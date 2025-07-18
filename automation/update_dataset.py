@@ -2,10 +2,12 @@ import pandas as pd
 from datetime import datetime
 import os
 
+
 def append_timestamp(file_path):
     df = pd.read_csv(file_path)
     df['updated_at'] = datetime.now().isoformat()
     return df
+
 
 if __name__ == "__main__":
     data_file = "../notebooks/data/cleaned_data.csv"
