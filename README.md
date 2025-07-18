@@ -1,6 +1,6 @@
 # Advtrix Learning 🚀
 
-Welcome to **Advtrix Learning**, a comprehensive repository of AI-driven solutions, machine learning models, automation pipelines, and interactive dashboards developed as part of the **Advtrix Internship Program**.
+Welcome to **Advtrix Learning**, a comprehensive repository of AI-driven solutions, machine learning models, automation pipelines, and an interactive Streamlit app developedby applying the knowledge and skills gained during my **Advtrix Internship** experience, into a practical, production-ready application.
 
 ---
 
@@ -20,18 +20,15 @@ Applies time series models for predicting marketing and sales trends.
 ✅ **Churn and Marketing Analysis**  
 A unified analysis framework for customer churn, marketing spend impact, predictive modeling, and customer clustering.
 
-✅ **MarketSense AI**  
-A full-fledged AI-powered marketing assistant with an intuitive user interface.
+✅ **Terrag AI (Streamlit App)**  
+An AI-powered interactive analytics app built with Streamlit for data exploration, lead scoring, segmentation, forecasting, and chat-based data insights.
 
 ✅ **Automation Scripts**  
-Automated workflows for data processing, reporting, and analysis.
-
-✅ **Interactive Dashboards**  
-Visual insights and analytics to empower data-driven decisions.
+Automated workflows for data processing, generation, and analysis.
 
 ---
 
-## 🗂️ Project Structure
+## 👤 Project Structure
 
 ```
 advtrix-learning/
@@ -43,10 +40,8 @@ advtrix-learning/
 │   ├── 03_trend_forecasting.ipynb
 │   └── 04_churn_and_marketing_analysis.ipynb
 │
-├── marketsense_ai/       # AI assistant backend & services
-├── automation/           # Automation scripts
-├── dashboards/           # Visual dashboards
-├── .github/              # CI/CD pipelines & workflows
+├── streamlit_app/        # Terrag AI - Streamlit app for data analytics
+├── automation/           # Automation scripts for data generation & cleaning
 ├── requirements.txt      # Python dependencies
 ├── .gitignore            # Git ignored files
 └── README.md             # Project documentation
@@ -58,12 +53,11 @@ advtrix-learning/
 
 ## 🔧 Tech Stack
 
-* **Python:** Core programming language
-* **Scikit-learn, XGBoost, Prophet:** Machine Learning & Forecasting
-* **Weaviate + LlamaIndex:** RAG system in MarketSense AI
-* **Next.js, TailwindCSS, shadcn/ui:** Frontend stack for MarketSense AI
-* **FastAPI, Flask, Streamlit:** API and UI prototypes
-* **GitHub Actions:** Automated CI/CD pipelines
+- **Python:** Core programming language
+- **Scikit-learn, XGBoost, Prophet:** Machine Learning & Forecasting
+- **Streamlit:** Interactive UI for Terrag AI
+- **Pandas, NumPy, Matplotlib, Altair:** Data processing and visualization
+- **GitHub:** Version control and collaboration
 
 ---
 
@@ -75,14 +69,25 @@ cd advtrix-learning
 pip install -r requirements.txt
 ```
 
-Launch Jupyter and navigate to the `notebooks/` folder to start exploring models and analyses.
+### To Run the Streamlit App
+
+```bash
+cd streamlit_app
+streamlit run app.py
+```
+
+### To Explore Notebooks
+
+Launch Jupyter and navigate to the `notebooks/` folder:
+```bash
+jupyter notebook
+```
 
 ---
 
 ## 📊 Datasets
 
-All datasets (CSV files) are available at:
-
+All datasets (CSV files) are available under:
 ```
 notebooks/data/
 ```
@@ -98,11 +103,10 @@ We welcome contributions! Fork the repository, submit PRs, or raise issues to co
 ## 👤 Author
 
 **Muhammad Taha Nasir**  
-
 🤖 AI Engineer  
 💻 Full Stack Developer  
 
-🔗 [GitHub](https://github.com/MuhammadTahaNasir)
+🔗 [GitHub](https://github.com/MuhammadTahaNasir)  
 🔗 [LinkedIn](https://www.linkedin.com/in/muhammadtahanasir/)
 
 ---
